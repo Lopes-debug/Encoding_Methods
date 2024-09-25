@@ -66,11 +66,14 @@ df = pd.read_csv(r'C:\Users\leand\OneDrive\Documentos\FormacaoDSA\f_projeto5\Scr
 #Apply dummies in ten categories selected
 # print(df['X1'].value_counts(ascending=False).head(10))
 
-# top_ = [x for x in df['X1'].value_counts().head(10).index]
 
-# def ten(df, col, top_):
-#     for i in top_:
-#         df[col + "_" + i] = np.where(df[col]==i, 1, 0)
+def ten(df, col):
+    index = [x for x in df[col].value_counts().head(10).index]
+    for i in index:
+        df[col + "_" + str(i)] = np.where(df[col]==i, 1, 0)
 
-# ten(df, 'X1', top_)
-# print(df)
+for col in df.columns:
+    ten(df, col)
+
+print(df.info())
+print(df.head())
